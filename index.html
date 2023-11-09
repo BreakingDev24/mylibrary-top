@@ -8,6 +8,31 @@
 </head>
 <body>
     
+        <header>
+            <div class="title">
+                <h1>My Library</h1>
+            </div>  
+        </header>
+
+        <main>
+            <section class="add-book">
+                <button id="new-book-btn" class="new-book-btn">Add New Book</button>
+                <dialog id="form-container" class="form-container">
+                    <button id="close-dialog-btn">&times;</button>
+                    <form action="#" id="new-book-form" class="new-book-form">
+                        <input type="text" placeholder="title" id="title" required>
+                        <input type="text" placeholder="author" id="author" required>
+                        <input type="number" placeholder="pages" id="pages" required>
+                        <button type="submit" form="new-book-form" id="submit-btn">Submit</button>
+                    </form>
+                </dialog>
+
+            </section>
+
+            <section id="library-container">
+
+            </section>
+        </main>
     <!-- JAVASCRIPT -->
     <script src="assets/js/script.js"></script>
 </body>
