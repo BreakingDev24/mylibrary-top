@@ -16,12 +16,11 @@ closeDialogBtn.addEventListener('click', () => {
     formContainerDialog.close()
 })
 
-formContainerDialog.showModal()
 
 // LIBRARY
 const myLibrary = [];
 
-// construnctor function for book
+// constructor function for book
 
 function Book(title, author, pages, read){
     this.title = title;
@@ -35,8 +34,18 @@ function addBookToLibrary(title, author, pages) {
     myLibrary.push(newBook)
 }
 
-function getBookValue(e){
-    e.preventDefault()
+// render book
+
+function renderBook(){
+
+    getBookValue()
+
+    createBookElement(myLibrary[myLibrary.length-1])
+    newBookForm.reset()
+    formContainerDialog.close()
+}
+
+function getBookValue(){
 
     const titleValue = document.getElementById('title').value;
     const authorValue = document.getElementById('author').value;
@@ -46,4 +55,34 @@ function getBookValue(e){
     console.log(myLibrary);
 }
 
-subtmitBtn.addEventListener('click', getBookValue)
+// book container
+ function createBookElement(book){
+    const bookDiv = document.createElement('div')
+    const bookTitle = document.createElement('h3')
+    const bookAuthor = document.createElement('p')
+    const bookPages = document.createElement('p')
+    const removeBookBtn = document.createElement('button')
+
+    libraryContainer.appendChild(bookDiv)
+    bookDiv.classList.add('book-div')
+
+    bookTitle.textContent = book.title
+    
+    bookDiv.appendChild(bookTitle)
+
+    bookAuthor.textContent = book.author
+    bookDiv.appendChild(bookAuthor)
+
+    bookPages.textContent = book.pages
+    bookDiv.appendChild(bookPages)
+
+    removeBookBtn.textContent = "remove"
+    bookDiv.appendChild(removeBookBtn)
+ }
+
+
+
+subtmitBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    renderBook()
+})
