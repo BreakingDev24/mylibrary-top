@@ -29,6 +29,7 @@ function Book(title, author, pages, read){
     this.read = read;
 }
 
+//push book in array
 function addBookToLibrary(title, author, pages) {
     let newBook = new Book(title, author, pages)
     myLibrary.push(newBook)
@@ -45,17 +46,17 @@ function renderBook(){
     formContainerDialog.close()
 }
 
+//get value from form
 function getBookValue(){
 
     const titleValue = document.getElementById('title').value;
     const authorValue = document.getElementById('author').value;
     const pagesValue = document.getElementById('pages').value;
-    
     addBookToLibrary(titleValue, authorValue, pagesValue)
     console.log(myLibrary);
 }
 
-// book container
+// creat book container
  function createBookElement(book){
     const bookDiv = document.createElement('div')
     const bookTitle = document.createElement('h3')
@@ -77,12 +78,27 @@ function getBookValue(){
     bookDiv.appendChild(bookPages)
 
     removeBookBtn.textContent = "remove"
+    removeBookBtn.classList.add('remove-btn')
     bookDiv.appendChild(removeBookBtn)
- }
 
+    const removeBtn = bookDiv.querySelector('.remove-btn')
+    //remove book from array and rendering
+    removeBtn.addEventListener('click', (e) => {
+        myLibrary.splice(myLibrary.indexOf(book), 1)
+        console.log(myLibrary);
+   
+        const element = e.currentTarget.parentElement
+        console.log(element);
+        libraryContainer.removeChild(element)
+        
+    })
+ }
 
 
 subtmitBtn.addEventListener('click', (e) => {
     e.preventDefault()
     renderBook()
 })
+
+
+
