@@ -4,7 +4,7 @@ const closeDialogBtn = document.getElementById('close-dialog-btn')
 const subtmitBtn = document.getElementById('submit-btn')
 const newBookForm = document.getElementById('new-book-form')
 const libraryContainer = document.getElementById('library-container')
-
+const readCheckbox = document.querySelector('input[name="read-checkbox"]')
 //open form window
 
 newBookBtn.addEventListener('click', () =>{
@@ -30,14 +30,15 @@ function Book(title, author, pages, read){
 }
 
 //push book in array
-function addBookToLibrary(title, author, pages) {
-    let newBook = new Book(title, author, pages)
+function addBookToLibrary(title, author, pages, read) {
+    let newBook = new Book(title, author, pages, read)
     myLibrary.push(newBook)
 }
 
 // render book
 
-function renderBook(){
+function renderBook(e){
+    e.preventDefault()
 
     getBookValue()
 
@@ -52,7 +53,14 @@ function getBookValue(){
     const titleValue = document.getElementById('title').value;
     const authorValue = document.getElementById('author').value;
     const pagesValue = document.getElementById('pages').value;
-    addBookToLibrary(titleValue, authorValue, pagesValue)
+    const readCheckbox = document.querySelector('input[name="read-checkbox"]')
+    let isRead
+    if (readCheckbox.checked){
+        isRead = true
+    } else {
+        isRead = false
+    }
+    addBookToLibrary(titleValue, authorValue, pagesValue, isRead)
     console.log(myLibrary);
 }
 
@@ -63,6 +71,8 @@ function getBookValue(){
     const bookAuthor = document.createElement('p')
     const bookPages = document.createElement('p')
     const removeBookBtn = document.createElement('button')
+    const isReadBtn = document.createElement('button')
+    const isReadIcon = document.createElement('i')
 
     libraryContainer.appendChild(bookDiv)
     bookDiv.classList.add('book-div')
@@ -81,7 +91,17 @@ function getBookValue(){
     removeBookBtn.classList.add('remove-btn')
     bookDiv.appendChild(removeBookBtn)
 
+    isReadBtn.appendChild(isReadIcon)
+    if(book.read){
+        isReadIcon.classList.add('fa-solid','fa-bookmark')
+    } else {
+        isReadIcon.classList.add('fa-regular','fa-bookmark')
+    }
+
+    bookDiv.appendChild(isReadBtn)
+
     const removeBtn = bookDiv.querySelector('.remove-btn')
+   
     //remove book from array and rendering
     removeBtn.addEventListener('click', (e) => {
         myLibrary.splice(myLibrary.indexOf(book), 1)
@@ -92,13 +112,24 @@ function getBookValue(){
         libraryContainer.removeChild(element)
         
     })
+    //change read status
+    isReadBtn.addEventListener('click', () => {
+        if(isReadIcon.classList.contains('fa-solid')){
+            book.read = false
+            isReadIcon.classList.toggle('fa-solid')
+            isReadIcon.classList.toggle('fa-regular')
+            console.log(myLibrary);
+        } else {
+            book.read = true 
+            isReadIcon.classList.toggle('fa-solid')
+            isReadIcon.classList.toggle('fa-regular')
+            console.log(myLibrary);
+        }
+    })
  }
 
 
-subtmitBtn.addEventListener('click', (e) => {
-    e.preventDefault()
-    renderBook()
-})
+subtmitBtn.addEventListener('click', renderBook)
 
 
 
