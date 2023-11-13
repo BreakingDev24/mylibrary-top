@@ -70,6 +70,7 @@ function getBookValue(){
     const bookTitle = document.createElement('h3')
     const bookAuthor = document.createElement('p')
     const bookPages = document.createElement('p')
+    const buttonContainer = document.createElement('div')
     const removeBookBtn = document.createElement('button')
     const isReadBtn = document.createElement('button')
     const isReadIcon = document.createElement('i')
@@ -87,9 +88,12 @@ function getBookValue(){
     bookPages.textContent = book.pages
     bookDiv.appendChild(bookPages)
 
+    bookDiv.appendChild(buttonContainer)
+    buttonContainer.classList.add('button-container')
+
     removeBookBtn.textContent = "remove"
     removeBookBtn.classList.add('remove-btn')
-    bookDiv.appendChild(removeBookBtn)
+    buttonContainer.appendChild(removeBookBtn)
 
     isReadBtn.appendChild(isReadIcon)
     if(book.read){
@@ -98,7 +102,7 @@ function getBookValue(){
         isReadIcon.classList.add('fa-regular','fa-bookmark')
     }
 
-    bookDiv.appendChild(isReadBtn)
+    buttonContainer.appendChild(isReadBtn)
 
     const removeBtn = bookDiv.querySelector('.remove-btn')
    
