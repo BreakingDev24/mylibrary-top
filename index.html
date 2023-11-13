@@ -4,35 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>MyLibrary</title>
 </head>
 <body>
-    
+    <!-- header -->
         <header>
             <div class="title">
                 <h1>My Library</h1>
             </div>  
         </header>
+    <!-- end -->
 
         <main>
+            <!-- add book section -->
             <section class="add-book">
+                <!-- button -->
                 <button id="new-book-btn" class="new-book-btn">Add New Book</button>
+                <!-- dialog form -->
                 <dialog id="form-container" class="form-container">
-                    <button id="close-dialog-btn">&times;</button>
+                    <button id="close-dialog-btn" class="close-dialog-btn">&times;</button>
                     <form action="#" id="new-book-form" class="new-book-form">
-                        <input type="text" placeholder="title" id="title" required>
-                        <input type="text" placeholder="author" id="author" required>
-                        <input type="number" placeholder="pages" id="pages" required>
+                        <input type="text" placeholder="title" id="title" required/>
+                        <input type="text" placeholder="author" id="author" required/>
+                        <input type="number" placeholder="pages" id="pages" required/>
+                        <div class="check-container">
+                            <input type="checkbox" id="read" name="read-checkbox">
+                            <label for="read">Have you read it?</label>
+                        </div>
                         <button type="submit" form="new-book-form" id="submit-btn">Submit</button>
+
                     </form>
                 </dialog>
 
             </section>
-
+            <!-- END add booK section -->
+            <!-- library container -->
             <section id="library-container">
-
             </section>
+            <!-- END library container -->
         </main>
+
     <!-- JAVASCRIPT -->
     <script src="assets/js/script.js"></script>
 </body>
