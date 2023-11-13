@@ -103,6 +103,8 @@ function getBookValue(){
     }
 
     buttonContainer.appendChild(isReadBtn)
+    isReadBtn.classList.add('read-btn')
+
 
     const removeBtn = bookDiv.querySelector('.remove-btn')
    
@@ -111,7 +113,7 @@ function getBookValue(){
         myLibrary.splice(myLibrary.indexOf(book), 1)
         console.log(myLibrary);
    
-        const element = e.currentTarget.parentElement
+        const element = e.currentTarget.parentElement.parentElement
         console.log(element);
         libraryContainer.removeChild(element)
         
