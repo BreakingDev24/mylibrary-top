@@ -37,8 +37,9 @@ function addBookToLibrary(title, author, pages, read) {
 
 // render book
 
-function renderBook(){
-
+function renderBook(e){
+    e.preventDefault()
+    
     getBookValue()
 
     createBookElement(myLibrary[myLibrary.length-1])
@@ -47,8 +48,7 @@ function renderBook(){
 }
 
 //get value from form
-function getBookValue(e){
-    e.preventDefault()
+function getBookValue(){
 
 
     const titleValue = document.getElementById('title').value;
@@ -136,7 +136,7 @@ function getBookValue(e){
  }
 
 
-subtmitBtn.addEventListener('click', renderBook())
+newBookForm.addEventListener('submit', renderBook)
 
 
 
