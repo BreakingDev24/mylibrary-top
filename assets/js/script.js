@@ -116,14 +116,14 @@ function getBookValue(){
     isReadBtn.addEventListener('click', () => {
         if(isReadIcon.classList.contains('fa-solid')){
             book.read = false
-            isReadIcon.classList.toggle('fa-solid')
-            isReadIcon.classList.toggle('fa-regular')
-            console.log(myLibrary);
+            isReadIcon.classList.remove('fa-solid')
+            isReadIcon.classList.add('fa-regular')
+            
         } else {
             book.read = true 
-            isReadIcon.classList.toggle('fa-solid')
-            isReadIcon.classList.toggle('fa-regular')
-            console.log(myLibrary);
+            isReadIcon.classList.add('fa-solid')
+            isReadIcon.classList.remove('fa-regular')
+            
         }
     })
  }
