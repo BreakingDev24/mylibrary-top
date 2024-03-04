@@ -18,7 +18,9 @@ closeDialogBtn.addEventListener('click', () => {
 
 
 // LIBRARY
-const myLibrary = [];
+let myLibrary = [];
+
+if(localStorage.getItem)
 
 // constructor function for book
 
@@ -33,6 +35,8 @@ function Book(title, author, pages, read){
 function addBookToLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read)
     myLibrary.push(newBook)
+
+    saveLocal()
 }
 
 // render book
@@ -55,12 +59,8 @@ function getBookValue(){
     const authorValue = document.getElementById('author').value;
     const pagesValue = document.getElementById('pages').value;
     const readCheckbox = document.querySelector('input[name="read-checkbox"]')
-    let isRead
-    if (readCheckbox.checked){
-        isRead = true
-    } else {
-        isRead = false
-    }
+    const isRead = readCheckbox.checked
+
     addBookToLibrary(titleValue, authorValue, pagesValue, isRead)
     console.log(myLibrary);
 }
@@ -117,6 +117,7 @@ function getBookValue(){
         const element = e.currentTarget.parentElement.parentElement
         console.log(element);
         libraryContainer.removeChild(element)
+        saveLocal()
         
     })
     //change read status
@@ -132,9 +133,27 @@ function getBookValue(){
             isReadIcon.classList.remove('fa-regular')
             
         }
+        saveLocal()
     })
  }
 
+ //local storage
+
+ function saveLocal (){
+     localStorage.setItem("books", JSON.stringify(myLibrary))
+ }
+
+ function restoreLocalData(){
+    const getBookFromStorage = JSON.parse(localStorage.getItem('books'))
+    if(getBookFromStorage !== null){
+        myLibrary = getBookFromStorage
+        myLibrary.forEach(book => {
+            createBookElement(book)
+        });
+    }
+        
+ }
+ restoreLocalData()
 
 newBookForm.addEventListener('submit', renderBook)
 
